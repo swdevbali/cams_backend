@@ -1,5 +1,20 @@
 from django.db import models
 
+
+class Vehicle(models.Model):
+    """
+    Harusnya dibagi menjadi merk dan tipe
+    Gambar skip.
+    """
+    nama = models.fields.CharField(max_length=255)
+    harga = models.fields.FloatField()
+
+    def __str__(self):
+        return self.nama
+
+    def __repr__(self):
+        return self.nama
+
 JENIS_KELAMIN = (
     ('L', 'Laki-Laki'),
     ('P', 'Perempuan'),
@@ -17,6 +32,7 @@ class Customer(models.Model):
     existing = models.fields.BooleanField()
     occupation = models.fields.CharField(max_length=1, choices=OCCUPATION, default='n') # FIX, NONFIX
     alamat = models.fields.TextField()
+    kendaraan = models.ManyToManyField(Vehicle)
 
     def __str__(self):
         return self.nama
